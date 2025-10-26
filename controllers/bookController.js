@@ -32,7 +32,7 @@ async function getSingleBook(req, res) {
 	}
 }
 
-// function to edit and update a book
+// function to update a book
 async function editAndUpdateBook(req, res) {
 	try {
 		const { id } = req.params;
@@ -45,9 +45,21 @@ async function editAndUpdateBook(req, res) {
 	}
 }
 
+// Function to delete a book
+async function deleteBook(req, res) {
+	try {
+		const { id } = req.params;
+		const book = await Book.findByIdAndDelete({ _id: id });
+		res.status(200).json(book);
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
+}
+
 module.exports = {
 	getAllBooks,
 	createNewBook,
 	getSingleBook,
 	editAndUpdateBook,
+	deleteBook,
 };
