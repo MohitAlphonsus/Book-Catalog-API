@@ -1,6 +1,8 @@
 const express = require('express');
 const connectToDatabase = require('./db/connection');
 const bookRoutes = require('./routes/bookRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 
@@ -15,6 +17,7 @@ app.get('/', function (req, res) {
 });
 
 app.use('/api/books', bookRoutes);
+app.use('/api/users', userRoutes);
 
 // start server
 async function startBookServer() {
