@@ -26,6 +26,7 @@ UserSchema.statics.login = async function (email, password) {
 	if (!doesPasswordMatch) {
 		throw new Error('Password does not match');
 	}
+
 	return user;
 };
 

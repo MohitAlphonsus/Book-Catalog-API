@@ -2,7 +2,6 @@ const Book = require('../model/bookModel');
 
 // function to create a new book
 async function createNewBook(req, res) {
-	console.log(req.body);
 	try {
 		const newBook = await Book.create(req.body);
 		res.status(201).json(newBook);
@@ -57,8 +56,8 @@ async function deleteBook(req, res) {
 }
 
 module.exports = {
-	getAllBooks,
 	createNewBook,
+	getAllBooks,
 	getSingleBook,
 	editAndUpdateBook,
 	deleteBook,

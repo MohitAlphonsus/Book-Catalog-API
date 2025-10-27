@@ -1,4 +1,5 @@
 const User = require('../model/userModel');
+const generateToken = require('../utils/token');
 
 // Function to register a new user
 async function regsiterNewUser(req, res) {
@@ -12,12 +13,13 @@ async function regsiterNewUser(req, res) {
 	}
 }
 
-// Function to login existing userf
+// Function to login existing userf (TOKEN GENERATION IN USER MODEL)
 async function loginUser(req, res) {
 	try {
 		const { email, password } = req.body;
 		const user = await User.login(email, password);
-		res.status(200).json(user);
+		const token = generateToken(user);
+		res.status(200).json({ user, token });
 	} catch (err) {
 		res.status(400).json({ message: err.message });
 	}

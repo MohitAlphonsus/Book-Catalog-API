@@ -6,8 +6,12 @@ const {
 	editAndUpdateBook,
 	deleteBook,
 } = require('../controllers/bookController');
+const protectRoutes = require('../middleware/authMiddleware.js');
 
 const router = express.Router();
+
+// MIDDLEWARE
+router.use(protectRoutes);
 
 // CREATE A NEW BOOK
 router.post('/', createNewBook);
