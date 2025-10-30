@@ -10,22 +10,19 @@ const protectRoutes = require('../middleware/authMiddleware.js');
 
 const router = express.Router();
 
-// MIDDLEWARE
-router.use(protectRoutes);
-
-// CREATE A NEW BOOK
-router.post('/', createNewBook);
-
 // GET ALL BOOKS
 router.get('/', getAllBooks);
 
 // GET A SINGLE BOOK
 router.get('/:id', getSingleBook);
 
+// CREATE A NEW BOOK
+router.post('/', protectRoutes, createNewBook);
+
 // UPDATE A BOOK
-router.put('/:id', editAndUpdateBook);
+router.put('/:id', protectRoutes, editAndUpdateBook);
 
 // DELETE A BOOK
-router.delete('/:id', deleteBook);
+router.delete('/:id', protectRoutes, deleteBook);
 
 module.exports = router;
