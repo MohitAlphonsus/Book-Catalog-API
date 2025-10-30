@@ -5,6 +5,10 @@ const generateToken = require('../utils/token');
 async function regsiterNewUser(req, res) {
 	try {
 		const { name, email, password } = req.body;
+		const doesUserExist = await User.findOne({ email });
+		if (doesUserExist) {
+			throw new Error('User already exists');
+		}
 		const hashedPassword = await User.signup(password);
 		const user = await User.create({ name, email, password: hashedPassword });
 		res.status(201).json(user);
